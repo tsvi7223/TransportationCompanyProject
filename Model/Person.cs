@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransportationCompanyProject.Model
 {
-    public class Person : BaseEntity
+    public abstract class Person : BaseEntity
     {
 
        public string lName { get; set; }

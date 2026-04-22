@@ -86,10 +86,10 @@ namespace TransportationCompanyProject.DB
             return person as BaseEntity;
         }
 
-        protected override BaseEntity NewEntity()
-        {
-            return new Person();
-        }
+        //protected override BaseEntity NewEntity()
+        //{
+        //    return new Person();
+        //}
 
     }
 }
