@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{315DDF87-9ED2-4C0C-9DE5-34B71F3476E4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TransportationCompanyProject</RootNamespace>
+    <AssemblyName>TransportationCompanyProject</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="GUI\AddressPage.xaml.cs">
+      <DependentUpon>AddressPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CustomerSignUp - Copy.cs" />
+    <Compile Include="GUI\CustomerSignUp.cs" />
+    <Compile Include="GUI\CustomerListControl.xaml.cs">
+      <DependentUpon>CustomerListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\DriverListControl .xaml.cs">
+      <DependentUpon>DriverListControl .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Exemple.xaml.cs">
+      <DependentUpon>Exemple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ManagerListControl.xaml.cs">
+      <DependentUpon>ManagerListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RideListControl.xaml.cs">
+      <DependentUpon>RideListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RideRequestListControl.xaml.cs">
+      <DependentUpon>RideRequestListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\VehicleListControl.xaml.cs">
+      <DependentUpon>VehicleListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\VehicleSeeder.cs" />
+    <Page Include="GUI\AddressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\CustomerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\DriverListControl .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\Exemple.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ManagerHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ManagerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\BasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\RideListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\RideRequestListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GUI\SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\VehicleListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DB\AddressDB.cs" />
+    <Compile Include="DB\AddressList.cs" />
+    <Compile Include="DB\BaseDB.cs" />
+    <Compile Include="DB\CityDB.cs" />
+    <Compile Include="DB\CityList.cs" />
+    <Compile Include="DB\CustomerDB.cs" />
+    <Compile Include="DB\CustomerList.cs" />
+    <Compile Include="DB\DriverDB.cs" />
+    <Compile Include="DB\DriverList.cs" />
+    <Compile Include="DB\ManagerDB.cs" />
+    <Compile Include="DB\ManagerList.cs" />
+    <Compile Include="DB\PeopleDB.cs" />
+    <Compile Include="DB\PeopleList.cs" />
+    <Compile Include="DB\RideDB.cs" />
+    <Compile Include="DB\RideList.cs" />
+    <Compile Include="DB\RideRequestDB.cs" />
+    <Compile Include="DB\RideRequestList.cs" />
+    <Compile Include="DB\StreetDB.cs" />
+    <Compile Include="DB\StreetList.cs" />
+    <Compile Include="DB\UserDB.cs" />
+    <Compile Include="DB\UserList.cs" />
+    <Compile Include="DB\VehicleDB.cs" />
+    <Compile Include="DB\VehicleList.cs" />
+    <Compile Include="GUI\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ManagerHomePage.xaml.cs">
+      <DependentUpon>ManagerHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\BaseEntity.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Driver.cs" />
+    <Compile Include="Model\Manager.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\RequestStatus.cs" />
+    <Compile Include="Model\Ride.cs" />
+    <Compile Include="Model\RideRequest.cs" />
+    <Compile Include="Model\RideStatus.cs" />
+    <Compile Include="Model\Street.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserType.cs" />
+    <Compile Include="Model\Vehicle .cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\בית הספר.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DB\DBTransportationCompanyProject.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
