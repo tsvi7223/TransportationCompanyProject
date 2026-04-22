@@ -7,19 +7,20 @@ using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.DB
 {
-    public class PeopleDB:BaseDB
+    public abstract class PeopleDB:BaseDB
     {
 
         private static PeopleDB instance;
 
-        private PeopleDB() { }
+        protected PeopleDB() { }
 
-        public static PeopleDB GetInstance()
-        {
-            if (instance == null)
-                instance = new PeopleDB();
-            return instance;
-        }
+        //מכיוון שאנשים היא מחלקה אבסטרקטית, לא ניתן ליצור מופע ישירות ממנה, ולכן אין צורך במנגנון סינגלטון כאן.
+        //public static PeopleDB GetInstance()
+        //{
+        //    if (instance == null)
+        //        instance = new PeopleDB();
+        //    return instance;
+        //}
 
         public void Delete(Person person)
         {
@@ -31,25 +32,24 @@ namespace TransportationCompanyProject.DB
             command.CommandText = "SELECT * FROM People";
             return new PeopleList(base.Select());
         }
-        public Person SelectById(int id)
-        {
-            PeopleList people = null;
-            command.CommandText = $"SELECT * FROM People WHERE PersonId = {id}";
-                people = new PeopleList(base.Select());
-            try
-            {
-            return people[0];
-            }
-            catch(Exception e)
-            {
-                    System.Diagnostics.Debug.WriteLine("error: " + e.Message + "\nSQL: " + command.CommandText + "\nPeople was null");
-                    // עדיף מאשר:
-                    Console.WriteLine("error: " + e.Message);
-               
-            }
-            return null;
+        //public virtual Person SelectById(int id)
+        //{
+        //    PeopleList people = null;
+        //    command.CommandText = $"SELECT * FROM People WHERE PersonId = {id}";
+        //        people = new PeopleList(base.Select());
+        //    try
+        //    {
+        //    return people[0];
+        //    }
+        //    catch(Exception e)
+        //    {
+        //            System.Diagnostics.Debug.WriteLine("error: " + e.Message + "\nSQL: " + command.CommandText + "\nPeople was null");
+        //            // עדיף מאשר:
+        //            //Console.WriteLine("error: " + e.Message);
+        //    }
+        //    return null;
 
-        }
+        //}
         public void Update(Person person)
         {
             command.CommandText = $"UPDATE people SET personId = {person.Id}, firstName = '{person.fName}', " +

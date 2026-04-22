@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.DB
 {
-    public class DriverDB : BaseDB
+    public class DriverDB : UserDB
     {
 
         private static DriverDB instance;
@@ -25,20 +26,27 @@ namespace TransportationCompanyProject.DB
         {
             command.CommandText = $"DELETE FROM Drivers WHERE(Drivers.driverId = {driver.Id})";
             base.ExecuteNonQuery();
+            base.Delete(driver); // מחיקת האדם מהטבלה People
         }
 
         public DriverList SelectAll()
         {
-            command.CommandText = "SELECT * FROM Drivers";
+            command.CommandText = $"SELECT Drivers.*, Users.*, People.* FROM   " +
+                $"((Drivers " +
+                     $"INNER JOIN  Users ON Drivers.DriverId = Users.UserId) " +
+                          $"INNER JOIN  People ON Users.UserId = People.PersonId)";
             return new DriverList(base.Select());
         }
 
         public Driver SelectById(int id)
         {
-            command.CommandText = $"SELECT * FROM Drivers WHERE (Drivers.driverId = {id})";
+            command.CommandText = "SELECT Drivers.*, Users.*, People.* FROM   " +
+                $"((Drivers " +
+                     $"INNER JOIN  Users ON Drivers.DriverId = Users.UserId) " +
+                          $"INNER JOIN  People ON Users.UserId = People.PersonId) " +
+                $"WHERE  (Drivers.DriverId = {id})";
         
                 DriverList drivers = null;
-                command.CommandText = $"SELECT * FROM Drivers WHERE DriverId = {id}";
                 try
                 {
                     drivers = new DriverList(base.Select());
@@ -54,6 +62,7 @@ namespace TransportationCompanyProject.DB
 
         public void Update(Driver driver)
         {
+            //TODO: עדכון צריך להתבצע בשתי טבלאות - גם ב-Drivers וגם ב-Users, כרגע מתעדכן רק ב-Drivers
             command.CommandText = $"UPDATE Drivers SET driverId = {driver.Id}, " +
                 $"firstName = '{driver.fName}', lastname = '{driver.lName}', " +
                 $"phoneNumber = '{driver.phoneNumber}', emailAddress = '{driver.emailAddress}', " +
@@ -68,6 +77,7 @@ namespace TransportationCompanyProject.DB
 
         public void Insert(Driver driver)
         {
+            //TODO: הוספה צריכה להתבצע בשתי טבלאות - גם ב-Drivers וגם ב-Users, כרגע מתבצעת רק ב-Drivers
             command.CommandText = $"INSERT INTO Drivers (driverId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword, driverLicenseNumber, currentLocationId, vehicleId, isActive)" +
                 $"VALUES({driver.Id}, '{driver.fName}', '{driver.lName}', '{driver.phoneNumber}', '{driver.emailAddress}', " +
                 $"#{driver.dateOfBirth}#, {driver.address.Id}, '{driver.UserName}', '{driver.UserPassword}', " +
@@ -77,6 +87,7 @@ namespace TransportationCompanyProject.DB
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
+            
             Driver driver = entity as Driver;
 
             driver.Id = int.Parse(reader["driverId"].ToString());
@@ -87,11 +98,13 @@ namespace TransportationCompanyProject.DB
             driver.CurrentLocation = AddressDB.GetInstance().SelectById(currentLocationId);
             int vehicleId = int.Parse(reader["vehicleId"].ToString());
             driver.Vehicle = VehicleDB.GetInstance().SelectById(vehicleId);
-           
 
-            User user1 = driver as User;
-            User user = UserDB.GetInstance().SelectById(driver.Id);
-            user1.Copy(user);
+            base.CreateModel(driver);
+
+
+            //User user1 = driver as User;
+            //User user = UserDB.GetInstance().SelectById(driver.Id);
+            //user1.Copy(user);
             /*
                         string fName = reader["firstName"].ToString();
                         string lName = reader["lastname"].ToString();

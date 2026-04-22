@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.DB
 {
-    public class UserDB : BaseDB
+    public class UserDB : PeopleDB
     {
 
         private static UserDB instance;
 
-        private UserDB() { }
+        protected UserDB() { }
 
         public static UserDB GetInstance()
         {
@@ -25,44 +26,56 @@ namespace TransportationCompanyProject.DB
         {
             command.CommandText = $"DELETE FROM Users WHERE(Users.userId = {user.Id})";
             base.ExecuteNonQuery();
+            base.Delete(user); // מחיקת האדם מהטבלה People
         }
 
         public UserList SelectAll()
         {
-            command.CommandText = "SELECT * FROM Users";
+            //command.CommandText = "SELECT * FROM Users";
+            command.CommandText = "SELECT Users.*, People.*" +
+                "FROM   (Users INNER JOIN People ON Users.UserId = People.PersonId)";
             return new UserList(base.Select());
         }
         public User SelectById(int ID)
         {
-            command.CommandText = $"SELECT * FROM Users WHERE UserId={ID}";
+            //command.CommandText = $"SELECT * FROM Users WHERE UserId={ID}";
+            command.CommandText = $"SELECT Users.*, People.* " +
+                $"FROM   (Users INNER JOIN People ON Users.UserId = People.PersonId)" +
+                $"WHERE  (Users.UserId = '{ID}')"; ;
             UserList users = null;
+            users = new UserList(base.Select());
             try
             {
-                users = new UserList(base.Select());
+                return users[0];
             }
             catch (Exception e)
             {
-                Console.WriteLine("error: " + e.Message);
+                System.Diagnostics.Debug.WriteLine("error: " + e.Message + "\nSQL: " + command.CommandText + "\nUsers was null");
             }
-            return users[0];
+            return null;
 
         }
 
 
         public UserList SelectByUserName(String name)
         {
-            command.CommandText = $"SELECT * FROM Users  WHERE UserName = '{name}'";
+            //command.CommandText = $"SELECT * FROM Users  WHERE UserName = '{name}'";
+            command.CommandText = $"SELECT Users.*, People.* " +
+                $"FROM   (Users INNER JOIN People ON Users.UserId = People.PersonId)" +
+                $"WHERE  (Users.UserName = '{name}')";
             return new UserList(base.Select());
         }
 
         public void Update(User user)
         {
+            //TODO: עדכון צריך להתבצע בשתי טבלאות - גם ב-Users וגם ב-People, כרגע מתעדכן רק ב-Users
             command.CommandText = $"UPDATE Users SET userId = {user.Id}, " +
                 $"firstName = '{user.fName}', lastname = '{user.lName}', " +
                 $"phoneNumber = '{user.phoneNumber}', emailAddress = '{user.emailAddress}', " +
                 $"dateOfBirth = #{user.dateOfBirth}#, addressId = {user.address.Id}, " +
-                $"userName = '{user.UserName}', userPassword = '{user.UserPassword}', ";
-                //$"userType = {(int)user.Type} WHERE userId = {user.Id}
+                $"userName = '{user.UserName}', userPassword = '{user.UserPassword}', " +
+                //$"userType = {(int)user.Type}" +
+                $" WHERE userId = {user.Id}";
                 
 
             base.ExecuteNonQuery();
@@ -70,7 +83,8 @@ namespace TransportationCompanyProject.DB
 
         public void Insert(User user)
         {
-            command.CommandText = $"INSERT INTO Users (userId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword, userType)" +
+            //TODO: הוספה צריכה להתבצע בשתי טבלאות - גם ב-Users וגם ב-People, כרגע מתבצעת רק ב-Users
+            command.CommandText = $"INSERT INTO Users (userId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword)" +
                 $"VALUES({user.Id}, '{user.fName}', '{user.lName}', '{user.phoneNumber}', '{user.emailAddress}', " +
                 $"#{user.dateOfBirth}#, {user.address.Id}, '{user.UserName}', '{user.UserPassword}')";
             base.ExecuteNonQuery();
@@ -84,10 +98,11 @@ namespace TransportationCompanyProject.DB
             user.Id = int.Parse(reader["userId"].ToString());
             user.UserName = reader["userName"].ToString();
             user.UserPassword = reader["userPassword"].ToString();
+            base.CreateModel(user); // מילוי שדות Person דרך BaseDB
 
-            Person person1 = user as Person;
-            Person person = PeopleDB.GetInstance().SelectById(user.Id);
-            person1.Copy(person);
+            //Person person1 = user as Person;
+            //Person person = PeopleDB.GetInstance().SelectById(user.Id);
+            //person1.Copy(person);
 
             //user.fName = person.fName;
             //user.lName = person.lName;
@@ -100,7 +115,7 @@ namespace TransportationCompanyProject.DB
             //UserType userType = (UserType)int.Parse(reader["userType"].ToString());
 
             // יצירת כתובת - יש להשלים עם שליפה מטבלת Address
-           // Address address = new Address(addressId, new City(0, ""), new Street(0, ""), "");
+            // Address address = new Address(addressId, new City(0, ""), new Street(0, ""), "");
 
             // יצירת המשתמש המתאים בהתאם לסוג
             //User user = null;

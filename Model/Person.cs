@@ -40,16 +40,16 @@ namespace TransportationCompanyProject.Model
             this.address = new Address();
         }
 
-        public void Copy(Person other)
-        {
-            this.lName = other.lName;
-            this.fName = other.fName;
-            this.phoneNumber = other.phoneNumber;
-            this.emailAddress = other.emailAddress;
-            this.dateOfBirth = other.dateOfBirth;
-            this.address = other.address;
+        //public void Copy(Person other)
+        //{
+        //    this.lName = other.lName;
+        //    this.fName = other.fName;
+        //    this.phoneNumber = other.phoneNumber;
+        //    this.emailAddress = other.emailAddress;
+        //    this.dateOfBirth = other.dateOfBirth;
+        //    this.address = other.address;
       
-        }
+        //}
         
     }
 }

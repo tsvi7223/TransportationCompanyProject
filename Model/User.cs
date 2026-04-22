@@ -54,15 +54,15 @@ namespace TransportationCompanyProject.Model
 
         }
 
-        public void Copy(User other)
-        {
-            this.UserPassword = other.userPassword;
-            this.UserName = other.userName;
+        //public void Copy(User other)
+        //{
+        //    this.UserPassword = other.userPassword;
+        //    this.UserName = other.userName;
 
-            PeopleDB peopleDB = PeopleDB.GetInstance();
-            Person person = peopleDB.SelectById(other.Id);
-            base.Copy(person);
-        }
+        //    PeopleDB peopleDB = PeopleDB.GetInstance();
+        //    Person person = peopleDB.SelectById(other.Id);
+        //    base.Copy(person);
+        //}
     }
     //public class User : Person
     //{
