@@ -35,15 +35,19 @@ namespace TransportationCompanyProject.DB
         {
             PeopleList people = null;
             command.CommandText = $"SELECT * FROM People WHERE PersonId = {id}";
+                people = new PeopleList(base.Select());
             try
             {
-                people = new PeopleList(base.Select());
+            return people[0];
             }
             catch(Exception e)
             {
-                Console.WriteLine("error: " + e.Message);
+                    System.Diagnostics.Debug.WriteLine("error: " + e.Message + "\nSQL: " + command.CommandText + "\nPeople was null");
+                    // עדיף מאשר:
+                    Console.WriteLine("error: " + e.Message);
+               
             }
-            return people[0];
+            return null;
 
         }
         public void Update(Person person)
