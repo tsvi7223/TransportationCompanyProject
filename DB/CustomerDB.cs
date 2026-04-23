@@ -7,7 +7,7 @@ using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.DB
 {
-    public class CustomerDB : BaseDB
+    public class CustomerDB : UserDB
     {
 
         private static CustomerDB instance;
@@ -25,57 +25,59 @@ namespace TransportationCompanyProject.DB
         {
             command.CommandText = $"DELETE FROM Users WHERE(Users.userId = {customer.Id})";
             base.ExecuteNonQuery();
+            base.Delete(customer);
         }
 
         public CustomerList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Users WHERE userType = {(int)UserType.Customer}";
+            command.CommandText = $"SELECT People.*, Users.*, Customers.*, People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+                $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId)";
             return new CustomerList(base.Select());
+        }
+        public Customer SelectById(int id)
+        {
+            command.CommandText = $"SELECT People.*, Users.*, Customers.*, People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+                           $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId) WHERE(People.PersonId = {id})";
+            CustomerList customer = null;
+            try
+            {
+                customer = new CustomerList(base.Select());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message);
+            }
+            return customer[0];
         }
 
         public void Update(Customer customer)
         {
-            command.CommandText = $"UPDATE Users SET userId = {customer.Id}, " +
-                $"firstName = '{customer.fName}', lastname = '{customer.lName}', " +
-                $"phoneNumber = '{customer.phoneNumber}', emailAddress = '{customer.emailAddress}', " +
-                $"dateOfBirth = #{customer.dateOfBirth}#, addressId = {customer.address.Id}, " +
-                $"userName = '{customer.UserName}', userPassword = '{customer.UserPassword}', " +
-                $"userType = {(int)UserType.Customer} WHERE userId = {customer.Id}";
-
+            command.CommandText = $"UPDATE Customers SET CustomerID = {customer.Id} WHERE CustomerID = {customer.Id}";
+           
             base.ExecuteNonQuery();
+
+            base.Update(customer);
         }
 
         public void Insert(Customer customer)
         {
-            command.CommandText = $"INSERT INTO Users (userId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword, userType)" +
-                $"VALUES({customer.Id}, '{customer.fName}', '{customer.lName}', '{customer.phoneNumber}', '{customer.emailAddress}', " +
-                $"#{customer.dateOfBirth}#, {customer.address.Id}, '{customer.UserName}', '{customer.UserPassword}', {(int)UserType.Customer})";
+            command.CommandText = $"INSERT INTO Customers (CustomerId) VALUES(56)";
             base.ExecuteNonQuery();
+            base.Insert(customer);
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Customer customer = entity as Customer;
 
-            int userId = int.Parse(reader["userId"].ToString());
-            string fName = reader["firstName"].ToString();
-            string lName = reader["lastname"].ToString();
-            string phoneNumber = reader["phoneNumber"].ToString();
-            string emailAddress = reader["emailAddress"].ToString();
-            DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
-            int addressId = int.Parse(reader["addressId"].ToString());
-            string userName = reader["userName"].ToString();
-            string userPassword = reader["userPassword"].ToString();
-
-            // יצירת כתובת - יש להשלים עם שליפה מטבלת Address
-            Address address = new Address(addressId, new City(0, ""), new Street(0, ""), "");
-
-            return new Customer(userPassword, userName, userId, lName, fName, phoneNumber, emailAddress, dateOfBirth, address);
+            int customerid = int.Parse(reader["customerid"].ToString());
+            base.CreateModel(customer);
+            return customer;
         }
 
         protected override BaseEntity NewEntity()
         {
-            return new Customer("", "", 0, "", "", "", "", DateTime.Now, new Address(0, new City(0, ""), new Street(0, ""), ""));
+            return new Customer();
         }
     }
 }
