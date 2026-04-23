@@ -63,25 +63,18 @@ namespace TransportationCompanyProject.DB
         public void Update(Driver driver)
         {
             //TODO: עדכון צריך להתבצע בשתי טבלאות - גם ב-Drivers וגם ב-Users, כרגע מתעדכן רק ב-Drivers
-            command.CommandText = $"UPDATE Drivers SET driverId = {driver.Id}, " +
-                $"firstName = '{driver.fName}', lastname = '{driver.lName}', " +
-                $"phoneNumber = '{driver.phoneNumber}', emailAddress = '{driver.emailAddress}', " +
-                $"dateOfBirth = #{driver.dateOfBirth}#, addressId = {driver.address.Id}, " +
-                $"userName = '{driver.UserName}', userPassword = '{driver.UserPassword}', " +
-                $"driverLicenseNumber = '{driver.DriverLicenseNumber}', " +
+            command.CommandText = $"driverLicenseNumber = '{driver.DriverLicenseNumber}', " +
                 $"currentLocationId = {driver.CurrentLocation.Id}, vehicleId = {driver.Vehicle.Id}, " +
                 $"isActive = {driver.IsActive} WHERE driverId = {driver.Id}";
 
             base.ExecuteNonQuery();
+            base.Update(driver);
         }
 
         public void Insert(Driver driver)
-        {
+        {///J
             //TODO: הוספה צריכה להתבצע בשתי טבלאות - גם ב-Drivers וגם ב-Users, כרגע מתבצעת רק ב-Drivers
-            command.CommandText = $"INSERT INTO Drivers (driverId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword, driverLicenseNumber, currentLocationId, vehicleId, isActive)" +
-                $"VALUES({driver.Id}, '{driver.fName}', '{driver.lName}', '{driver.phoneNumber}', '{driver.emailAddress}', " +
-                $"#{driver.dateOfBirth}#, {driver.address.Id}, '{driver.UserName}', '{driver.UserPassword}', " +
-                $"'{driver.DriverLicenseNumber}', {driver.CurrentLocation.Id}, {driver.Vehicle.Id}, {driver.IsActive})";
+            command.CommandText = $"INSERT INTO Drivers (DriverId, DriverLicenseNumber, CurrentLocationId, VehicleId, IsActive) VALUES(3, '3', 3, 3, 3))";
             base.ExecuteNonQuery();
         }
 
