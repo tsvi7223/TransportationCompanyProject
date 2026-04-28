@@ -30,38 +30,42 @@ namespace TransportationCompanyProject.DB
 
         public CustomerList SelectAll()
         {
-            command.CommandText = $"SELECT People.*, Users.*, Customers.*, People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+            command.CommandText = $"SELECT People.*, Users.*, Customers.*," +
+                $" People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
                 $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId)";
             return new CustomerList(base.Select());
         }
         public Customer SelectById(int id)
         {
-            command.CommandText = $"SELECT People.*, Users.*, Customers.*, People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
-                           $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId) WHERE(People.PersonId = {id})";
+            command.CommandText = $"SELECT People.*, Users.*, Customers.*," +
+                $" People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+                $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId) WHERE(Customers.CustomerID = {id})";
+
             CustomerList customer = null;
+            customer = new CustomerList(base.Select());
             try
             {
-                customer = new CustomerList(base.Select());
+                return customer[0];
             }
             catch (Exception e)
             {
-                Console.WriteLine("error: " + e.Message);
+                Console.WriteLine("error: " + e.Message + "customersdb is null");
             }
-            return customer[0];
+            return null;
         }
 
         public void Update(Customer customer)
         {
-            command.CommandText = $"UPDATE Customers SET CustomerID = {customer.Id} WHERE CustomerID = {customer.Id}";
+            command.CommandText = $"UPDATE Customers SET CustomerID = {customer.Id} WHERE (CustomerID = {customer.Id})";
            
             base.ExecuteNonQuery();
-
             base.Update(customer);
         }
 
         public void Insert(Customer customer)
+
         {
-            command.CommandText = $"INSERT INTO Customers (CustomerId) VALUES(56)";
+            command.CommandText = $"INSERT INTO Customers (CustomerId) VALUES{5}";
             base.ExecuteNonQuery();
             base.Insert(customer);
         }
@@ -70,7 +74,7 @@ namespace TransportationCompanyProject.DB
         {
             Customer customer = entity as Customer;
 
-            int customerid = int.Parse(reader["customerid"].ToString());
+            customer.Id = int.Parse(reader["customerid"].ToString());
             base.CreateModel(customer);
             return customer;
         }

@@ -31,31 +31,29 @@ namespace TransportationCompanyProject.DB
 
         public DriverList SelectAll()
         {
-            command.CommandText = $"SELECT Drivers.*, Users.*, People.* FROM   " +
-                $"((Drivers " +
-                     $"INNER JOIN  Users ON Drivers.DriverId = Users.UserId) " +
-                          $"INNER JOIN  People ON Users.UserId = People.PersonId)";
+            command.CommandText = $" SELECT People.*, Users.*, Drivers.*" +
+                $" FROM((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+                $"INNER JOIN Drivers ON Users.UserId = Drivers.DriverId)";
             return new DriverList(base.Select());
         }
 
         public Driver SelectById(int id)
         {
-            command.CommandText = "SELECT Drivers.*, Users.*, People.* FROM   " +
-                $"((Drivers " +
-                     $"INNER JOIN  Users ON Drivers.DriverId = Users.UserId) " +
-                          $"INNER JOIN  People ON Users.UserId = People.PersonId) " +
-                $"WHERE  (Drivers.DriverId = {id})";
-        
-                DriverList drivers = null;
-                try
-                {
-                    drivers = new DriverList(base.Select());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("error: " + e.Message);
-                }
+            command.CommandText = $" SELECT People.*, Users.*, Drivers.*" +
+               $" FROM((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
+               $"INNER JOIN Drivers ON Users.UserId = Drivers.DriverId) WHERE(Drivers.DriverId = {id})";
+
+            DriverList drivers = null;
+            drivers = new DriverList(base.Select());
+            try
+            {
                 return drivers[0];
+            }
+                catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message+ " driversdb is null");
+            }
+              
 
             
         }
@@ -74,8 +72,10 @@ namespace TransportationCompanyProject.DB
         public void Insert(Driver driver)
         {///J
             //TODO: הוספה צריכה להתבצע בשתי טבלאות - גם ב-Drivers וגם ב-Users, כרגע מתבצעת רק ב-Drivers
-            command.CommandText = $"INSERT INTO Drivers (DriverId, DriverLicenseNumber, CurrentLocationId, VehicleId, IsActive) VALUES(3, '3', 3, 3, 3))";
+            command.CommandText = $"INSERT INTO Drivers (DriverId, DriverLicenseNumber, CurrentLocationId, VehicleId, IsActive) " +
+                $"VALUES({driver.Id}, {driver.DriverLicenseNumber}, {driver.CurrentLocation}, {driver.Vehicle}, {driver.IsActive}))";
             base.ExecuteNonQuery();
+            base.Insert(driver);
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
@@ -84,6 +84,7 @@ namespace TransportationCompanyProject.DB
             Driver driver = entity as Driver;
 
             driver.Id = int.Parse(reader["driverId"].ToString());
+
             driver.DriverLicenseNumber = reader["driverLicenseNumber"].ToString();
             driver.IsActive = bool.Parse(reader["isActive"].ToString());
 
@@ -94,33 +95,12 @@ namespace TransportationCompanyProject.DB
 
             base.CreateModel(driver);
 
-
-            //User user1 = driver as User;
-            //User user = UserDB.GetInstance().SelectById(driver.Id);
-            //user1.Copy(user);
-            /*
-                        string fName = reader["firstName"].ToString();
-                        string lName = reader["lastname"].ToString();
-                        string phoneNumber = reader["phoneNumber"].ToString();
-                        string emailAddress = reader["emailAddress"].ToString();
-                        DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
-                        int addressId = int.Parse(reader["addressId"].ToString());
-                        string userName = reader["userName"].ToString();
-                        string userPassword = reader["userPassword"].ToString();
-                        // יצירת אובייקטים - יש להשלים עם שליפות מהטבלאות המתאימות
-                        Address address = new Address(addressId, new City(0, ""), new Street(0, ""), "");
-                        Address currentLocation = new Address(currentLocationId, new City(0, ""), new Street(0, ""), "");
-                        Vehicle vehicle = new Vehicle(vehicleId, "", 0, "", "");
-            */
-            return driver as BaseEntity;
+            return driver;
         }
 
         protected override BaseEntity NewEntity()
         {
-            return new Driver("", "", 0, "", "", "", "", DateTime.Now, 
-                new Address(0, new City(0, ""), new Street(0, ""), ""), "", 
-                new Address(0, new City(0, ""), new Street(0, ""), ""), 
-                new Vehicle(0, "", 0, "", ""), false);
+            return new Driver();
         }
     }
 }

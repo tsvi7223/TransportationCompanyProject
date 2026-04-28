@@ -23,5 +23,9 @@ namespace TransportationCompanyProject.Model
             this.Vehicle = vehicle;
             this.IsActive = isActive;
         }
+
+        public Driver()
+        {
+        }
     }
 }

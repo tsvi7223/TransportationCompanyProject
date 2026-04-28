@@ -8,6 +8,10 @@ namespace TransportationCompanyProject.Model
 {
     public class Manager : User
     {
+        public Manager()
+        {
+        }
+
         public Manager(string userPassword, string UserName, int Id,
             string lName, string fName, string phoneNumber, string emailAddress,
             DateTime dateOfBirth, Address address)

@@ -7,7 +7,7 @@ using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.DB
 {
-    public class ManagerDB : BaseDB
+    public class ManagerDB : UserDB
     {
 
         private static ManagerDB instance;
@@ -23,59 +23,64 @@ namespace TransportationCompanyProject.DB
 
         public void Delete(Manager manager)
         {
-            command.CommandText = $"DELETE FROM Users WHERE(Users.userId = {manager.Id})";
+            command.CommandText = $"DELETE FROM Managers WHERE(Managers.driverId = {manager.Id})";
             base.ExecuteNonQuery();
+            base.Delete(manager);
         }
 
         public ManagerList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM Users WHERE userType = {(int)UserType.Manager}";
+            command.CommandText = $"SELECT People.*, Users.*, Drivers.*," +
+                $" People.PersonId FROM((People INNER JOIN Users ON People.PersonId = Users.UserId)" +
+                $" INNER JOIN Drivers ON Users.UserId = Drivers.DriverId)";
             return new ManagerList(base.Select());
+        }
+        public Manager SelectById(int id)
+        {
+            command.CommandText = $"SELECT People.*, Users.*, Drivers.*," +
+             $" People.PersonId FROM((People INNER JOIN Users ON People.PersonId = Users.UserId)" +
+             $" INNER JOIN Drivers ON Users.UserId = Drivers.DriverId) WHERE(Managers.ManagerId = {id})";
+
+            ManagerList manager = null;
+            manager = new ManagerList(base.Select());
+            try
+            {
+                return manager[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message +"managersdb is null" );
+            }
+            return null;
         }
 
         public void Update(Manager manager)
         {
-            command.CommandText = $"UPDATE Users SET userId = {manager.Id}, " +
-                $"firstName = '{manager.fName}', lastname = '{manager.lName}', " +
-                $"phoneNumber = '{manager.phoneNumber}', emailAddress = '{manager.emailAddress}', " +
-                $"dateOfBirth = #{manager.dateOfBirth}#, addressId = {manager.address.Id}, " +
-                $"userName = '{manager.UserName}', userPassword = '{manager.UserPassword}', " +
-                $"userType = {(int)UserType.Manager} WHERE userId = {manager.Id}";
+            command.CommandText = $"UPDATE Managers SET ManagerId =  {manager.Id} WHERE (ManagerId = {manager.Id})";
 
             base.ExecuteNonQuery();
+            base.Update(manager);
         }
 
         public void Insert(Manager manager)
         {
-            command.CommandText = $"INSERT INTO Users (userId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword, userType)" +
-                $"VALUES({manager.Id}, '{manager.fName}', '{manager.lName}', '{manager.phoneNumber}', '{manager.emailAddress}', " +
-                $"#{manager.dateOfBirth}#, {manager.address.Id}, '{manager.UserName}', '{manager.UserPassword}', {(int)UserType.Manager})";
+            command.CommandText = $"INSERT INTO Managers (ManagerId) VALUES{5}";
             base.ExecuteNonQuery();
+            base.Insert(manager);
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Manager manager = entity as Manager;
 
-            int userId = int.Parse(reader["userId"].ToString());
-            string fName = reader["firstName"].ToString();
-            string lName = reader["lastname"].ToString();
-            string phoneNumber = reader["phoneNumber"].ToString();
-            string emailAddress = reader["emailAddress"].ToString();
-            DateTime dateOfBirth = (DateTime)reader["dateOfBirth"];
-            int addressId = int.Parse(reader["addressId"].ToString());
-            string userName = reader["userName"].ToString();
-            string userPassword = reader["userPassword"].ToString();
-
-            // יצירת כתובת - יש להשלים עם שליפה מטבלת Address
-            Address address = new Address(addressId, new City(0, ""), new Street(0, ""), "");
-
-            return new Manager(userPassword, userName, userId, lName, fName, phoneNumber, emailAddress, dateOfBirth, address);
+            manager.Id = int.Parse(reader["ManagerId"].ToString());
+            base.CreateModel(manager);
+            return manager; 
         }
 
         protected override BaseEntity NewEntity()
         {
-            return new Manager("", "", 0, "", "", "", "", DateTime.Now, new Address(0, new City(0, ""), new Street(0, ""), ""));
+            return new Manager();
         }
     }
 }

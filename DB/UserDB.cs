@@ -32,9 +32,9 @@ namespace TransportationCompanyProject.DB
         public UserList SelectAll()
         {
             //command.CommandText = "SELECT * FROM Users";
-            command.CommandText = "SELECT Users.*, People.*" +
-                "FROM   (Users INNER JOIN People ON Users.UserId = People.PersonId)";
-            return new UserList(base.Select());
+                command.CommandText = "SELECT Users.*, People.*" +
+                "FROM  (Users INNER JOIN People ON Users.UserId = People.PersonId)";
+                return new UserList(base.Select());
         }
         public User SelectById(int ID)
         {
@@ -70,36 +70,31 @@ namespace TransportationCompanyProject.DB
         {
             //TODO: עדכון צריך להתבצע בשתי טבלאות - גם ב-Users וגם ב-People, כרגע מתעדכן רק ב-Users
             command.CommandText = $"UPDATE Users SET userId = {user.Id}, " +
-                $"firstName = '{user.fName}', lastname = '{user.lName}', " +
-                $"phoneNumber = '{user.phoneNumber}', emailAddress = '{user.emailAddress}', " +
-                $"dateOfBirth = #{user.dateOfBirth}#, addressId = {user.address.Id}, " +
-                $"userName = '{user.UserName}', userPassword = '{user.UserPassword}', " +
-                //$"userType = {(int)user.Type}" +
-                $" WHERE userId = {user.Id}";
-                
-
+                $"userName = '{user.UserName}', userPassword = '{user.UserPassword}', ";
             base.ExecuteNonQuery();
+            base.Update(user);  
         }
 
         public void Insert(User user)
         {
             //TODO: הוספה צריכה להתבצע בשתי טבלאות - גם ב-Users וגם ב-People, כרגע מתבצעת רק ב-Users
-            command.CommandText = $"INSERT INTO Users (userId, firstName, lastname, phoneNumber, emailAddress, dateOfBirth, addressId, userName, userPassword)" +
-                $"VALUES({user.Id}, '{user.fName}', '{user.lName}', '{user.phoneNumber}', '{user.emailAddress}', " +
-                $"#{user.dateOfBirth}#, {user.address.Id}, '{user.UserName}', '{user.UserPassword}')";
+            command.CommandText = $"INSERT INTO Users (userId ,userName, userPassword)" +
+                $"VALUES({user.Id}, '{user.UserName}', '{user.UserPassword}') WHERE (userId= {user.Id})";
             base.ExecuteNonQuery();
+            base.Insert(user);
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
-            // הערה: User הוא מחלקה מופשטת, לכן נצטרך ליצור מופע של Customer, Driver או Manager
-            // בהתאם ל-userType
+          
             User user = entity as User;
+
             user.Id = int.Parse(reader["userId"].ToString());
             user.UserName = reader["userName"].ToString();
             user.UserPassword = reader["userPassword"].ToString();
-            base.CreateModel(user); // מילוי שדות Person דרך BaseDB
 
+            base.CreateModel(user); // מילוי שדות Person דרך BaseDB
+            return user;
             //Person person1 = user as Person;
             //Person person = PeopleDB.GetInstance().SelectById(user.Id);
             //person1.Copy(person);
@@ -133,7 +128,7 @@ namespace TransportationCompanyProject.DB
             //        break;
             //}
 
-            return user as BaseEntity;
+
         }
 
 
@@ -141,7 +136,6 @@ namespace TransportationCompanyProject.DB
         protected override BaseEntity NewEntity()
         {
             // User הוא מופשט, נחזיר Customer כברירת מחדל
-            //return new Customer("", "", 0, "", "", "", "", DateTime.Now, new Address(0, new City(0, ""), new Street(0, ""), ""));
             return new User();
         }
     }
