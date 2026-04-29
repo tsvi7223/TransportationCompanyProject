@@ -55,12 +55,27 @@ namespace TransportationCompanyProject.DB
             street.Id = int.Parse(reader["streetId"].ToString());
             street.StreetName = reader["streetName"].ToString();
 
-            return street as BaseEntity;
+            return street;
         }
 
         protected override BaseEntity NewEntity()
         {
-            return new Street(0, "");
+            return new Street();
+        }
+
+        internal Street SelectById(int Id)
+        {
+            command.CommandText = $"SELECT * FROM Street WHERE streetId = {Id}";
+            StreetList streets = new StreetList(base.Select());
+            try
+            {
+                return streets[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message + " this id is not used by any Street");
+            }
+            return null;
         }
     }
 }

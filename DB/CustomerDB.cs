@@ -41,8 +41,7 @@ namespace TransportationCompanyProject.DB
                 $" People.PersonId FROM ((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
                 $"INNER JOIN Customers ON Users.UserId = Customers.CustomerId) WHERE(Customers.CustomerID = {id})";
 
-            CustomerList customer = null;
-            customer = new CustomerList(base.Select());
+            CustomerList  customer = new CustomerList(base.Select());
             try
             {
                 return customer[0];

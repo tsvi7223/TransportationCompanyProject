@@ -21,7 +21,6 @@ namespace TransportationCompanyProject.DB
         //        instance = new PeopleDB();
         //    return instance;
         //}
-
         public void Delete(Person person)
         {
             command.CommandText = $"DELETE FROM People WHERE(People.personId = {person.Id})";
@@ -83,7 +82,7 @@ namespace TransportationCompanyProject.DB
 
             
 
-            return person as BaseEntity;
+            return person ;
         }
 
         //protected override BaseEntity NewEntity()

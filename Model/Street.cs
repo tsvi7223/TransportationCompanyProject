@@ -15,5 +15,9 @@ namespace TransportationCompanyProject.Model
             this.StreetName = streetName;
         
         }
+        public Street()
+           : base(0)
+        {
+        }
     }
 }

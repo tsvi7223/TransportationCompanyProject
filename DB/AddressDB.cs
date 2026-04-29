@@ -36,7 +36,16 @@ namespace TransportationCompanyProject.DB
         {
             command.CommandText = $"SELECT * FROM Address WHERE AddressID = {id}";
             AddressList addresses = new AddressList(base.Select());
-            return addresses[0];
+            try
+            {
+                return addresses[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message + " this id is not used by any addres ");
+            }
+            return null;
+           
         }
 
 
@@ -61,23 +70,24 @@ namespace TransportationCompanyProject.DB
             Address address = entity as Address;
             
             // המרות (Casting) בטוחות יותר למקרה של ערכי NULL או סוגים שונים
-            int addressId = int.Parse(reader["addressId"].ToString());
-            int cityId = int.Parse(reader["cityId"].ToString());
+            address.Id = int.Parse(reader["addressId"].ToString());
+
+            int cityid = int.Parse(reader["cityId"].ToString());
+            address.City = CityDB.GetInstance().SelectById(cityid);
+
             int streetId = int.Parse(reader["streetId"].ToString());
+            address.Street = StreetDB.GetInstance().SelectById(streetId);
+            
             string buildingNumber = reader["buildingNumber"].ToString();
 
-            // יצירת אובייקטים של City ו-Street
-            // הערה: ייתכן שתצטרך לטעון את שמות העיר והרחוב מטבלאות נפרדות
-            City city = new City(cityId, ""); // יש להשלים עם שאילתת JOIN או שליפה נפרדת
-            Street street = new Street(streetId, ""); // יש להשלים עם שאילתת JOIN או שליפה נפרדת
-
-            return new Address(addressId, city, street, buildingNumber);
+           
+            return  address;
         }
 
         protected override BaseEntity NewEntity()
         {
             // יצירת אובייקט ריק - יש להשלים עם ערכי ברירת מחדל מתאימים
-            return new Address(0, new City(0, ""), new Street(0, ""), "");
+            return new Address();
         }
     }
 }

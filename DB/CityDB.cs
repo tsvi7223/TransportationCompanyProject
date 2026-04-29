@@ -60,7 +60,23 @@ namespace TransportationCompanyProject.DB
 
         protected override BaseEntity NewEntity()
         {
-            return new City(0, "");
+            return new City();
+        }
+
+        public City SelectById(int id)
+        {
+            command.CommandText = $"SELECT * FROM City WHERE cityId = {id}";
+            CityList cities = new CityList(base.Select());
+            try
+            {
+                return cities[0];
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message + " this id is not used by any city ");
+            }
+            return null;
         }
     }
 }

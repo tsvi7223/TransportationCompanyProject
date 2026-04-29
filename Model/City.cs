@@ -14,5 +14,9 @@ namespace TransportationCompanyProject.Model
         {
             this.CityName = cityName;
         }
+        public City()
+           : base(0)
+        {
+        }
     }
 }

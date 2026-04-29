@@ -43,8 +43,7 @@ namespace TransportationCompanyProject.DB
                $" FROM((People INNER JOIN Users ON People.PersonId = Users.UserId) " +
                $"INNER JOIN Drivers ON Users.UserId = Drivers.DriverId) WHERE(Drivers.DriverId = {id})";
 
-            DriverList drivers = null;
-            drivers = new DriverList(base.Select());
+            DriverList  drivers = new DriverList(base.Select());
             try
             {
                 return drivers[0];

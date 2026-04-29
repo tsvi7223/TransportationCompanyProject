@@ -41,8 +41,7 @@ namespace TransportationCompanyProject.DB
              $" People.PersonId FROM((People INNER JOIN Users ON People.PersonId = Users.UserId)" +
              $" INNER JOIN Drivers ON Users.UserId = Drivers.DriverId) WHERE(Managers.ManagerId = {id})";
 
-            ManagerList manager = null;
-            manager = new ManagerList(base.Select());
+            ManagerList manager = new ManagerList(base.Select());
             try
             {
                 return manager[0];
