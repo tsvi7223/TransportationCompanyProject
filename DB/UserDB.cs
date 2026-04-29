@@ -60,13 +60,11 @@ namespace TransportationCompanyProject.DB
         public UserList SelectByUserProprty(string name,string password)
         {
             //command.CommandText = $"SELECT * FROM Users  WHERE UserName = '{name}'";
-            command.CommandText = $"SELECT Users.*, People.* " +
-                $"FROM (Users INNER JOIN People ON Users.UserId = People.PersonId)" +
-                $"WHERE (Users.UserName = '{name}')";
+            
 
             command.CommandText = $"SELECT People.*, Users.*" +
                 $" FROM (People INNER JOIN Users ON People.PersonId = Users.UserId)" +
-                $" WHERE (Users.UserPassword = {password}) AND(Users.UserName = {name})";
+                $" WHERE (Users.UserPassword = '{password}') AND(Users.UserName = '{name}')";
             return new UserList(base.Select());
         }
 

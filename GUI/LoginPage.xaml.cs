@@ -66,10 +66,9 @@ namespace TransportationCompanyProject.GUI
         private void login(object sender, RoutedEventArgs e)
         {
             //First find the user in our database
-            DB.UserList users = UserDB.GetInstance().SelectByUserName(UserNameTbox.Text);
-            if (users.First().UserPassword == PassTbox.Text)
+            DB.UserList users = UserDB.GetInstance().SelectByUserProprty(UserNameTbox.Text,PassTbox.Text);
+            if (users.First().UserName == UserNameTbox.Text && users.First().UserPassword == PassTbox.Text)
             {
-
                 this.user = users.First();
                 NavigationService nav = NavigationService.GetNavigationService(this);
                 //לשלוח משתמש דרך בנאי
