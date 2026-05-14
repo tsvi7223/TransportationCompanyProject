@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TransportationCompany_Server;
 using TransportationCompanyProject.DB;
 using TransportationCompanyProject.Model;
 
@@ -23,6 +24,7 @@ namespace TransportationCompanyProject.GUI
     public partial class LoginPage : Page
     {
         public User user = new User();
+        Transportation_service TranService = new Transportation_service();
        public LoginPage()
         {
             InitializeComponent();
@@ -65,8 +67,11 @@ namespace TransportationCompanyProject.GUI
 
         private void login(object sender, RoutedEventArgs e)
         {
-            //First find the user in our database
-            DB.UserList users = UserDB.GetInstance().SelectByUserProprty(UserNameTbox.Text,PassTbox.Text);
+           // TranService.Delete(new City());
+
+ //First find the user in our database
+            //DB.UserList users = UserDB.GetInstance().SelectByUserProprty(UserNameTbox.Text,PassTbox.Text);
+            UserList users = TranService.getAllUsers();
             if (users.First().UserName == UserNameTbox.Text && users.First().UserPassword == PassTbox.Text)
             {
                 this.user = users.First();

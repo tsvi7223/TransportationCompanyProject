@@ -57,6 +57,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -75,6 +77,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="GUI\AddressPage.xaml.cs">
       <DependentUpon>AddressPage.xaml</DependentUpon>
     </Compile>
@@ -161,29 +168,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB\AddressDB.cs" />
-    <Compile Include="DB\AddressList.cs" />
-    <Compile Include="DB\BaseDB.cs" />
-    <Compile Include="DB\CityDB.cs" />
-    <Compile Include="DB\CityList.cs" />
-    <Compile Include="DB\CustomerDB.cs" />
-    <Compile Include="DB\CustomerList.cs" />
-    <Compile Include="DB\DriverDB.cs" />
-    <Compile Include="DB\DriverList.cs" />
-    <Compile Include="DB\ManagerDB.cs" />
-    <Compile Include="DB\ManagerList.cs" />
-    <Compile Include="DB\PeopleDB.cs" />
-    <Compile Include="DB\PeopleList.cs" />
-    <Compile Include="DB\RideDB.cs" />
-    <Compile Include="DB\RideList.cs" />
-    <Compile Include="DB\RideRequestDB.cs" />
-    <Compile Include="DB\RideRequestList.cs" />
-    <Compile Include="DB\StreetDB.cs" />
-    <Compile Include="DB\StreetList.cs" />
-    <Compile Include="DB\UserDB.cs" />
-    <Compile Include="DB\UserList.cs" />
-    <Compile Include="DB\VehicleDB.cs" />
-    <Compile Include="DB\VehicleList.cs" />
     <Compile Include="GUI\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -199,21 +183,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Address.cs" />
-    <Compile Include="Model\BaseEntity.cs" />
-    <Compile Include="Model\City.cs" />
-    <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\Driver.cs" />
-    <Compile Include="Model\Manager.cs" />
-    <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\RequestStatus.cs" />
-    <Compile Include="Model\Ride.cs" />
-    <Compile Include="Model\RideRequest.cs" />
-    <Compile Include="Model\RideStatus.cs" />
-    <Compile Include="Model\Street.cs" />
-    <Compile Include="Model\User.cs" />
-    <Compile Include="Model\UserType.cs" />
-    <Compile Include="Model\Vehicle .cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -231,6 +200,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceReference1\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Transportation_service.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -242,11 +221,36 @@
   <ItemGroup>
     <Resource Include="Resources\בית הספר.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="DB\DBTransportationCompanyProject.accdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="Host\Host.csproj">
+      <Project>{11e15e9a-4d22-47a0-b4bb-88982a7a78db}</Project>
+      <Name>Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="TransportationCompany_Server\TransportationCompany_Server.csproj">
+      <Project>{C27B4C7E-58A6-4C70-9E1A-4042BEC311DE}</Project>
+      <Name>TransportationCompany_Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
