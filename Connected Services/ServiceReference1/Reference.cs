@@ -9,17 +9,88 @@
 //------------------------------------------------------------------------------
 
 namespace TransportationCompanyProject.ServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BaseEntity", Namespace="http://schemas.datacontract.org/2004/07/TransportationCompanyProject.Model")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(TransportationCompanyProject.ServiceReference1.City))]
+    public partial class BaseEntity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="City", Namespace="http://schemas.datacontract.org/2004/07/TransportationCompanyProject.Model")]
+    [System.SerializableAttribute()]
+    public partial class City : TransportationCompanyProject.ServiceReference1.BaseEntity {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CityName {
+            get {
+                return this.CityNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityNameField, value) != true)) {
+                    this.CityNameField = value;
+                    this.RaisePropertyChanged("CityName");
+                }
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ITransportation_service")]
     public interface ITransportation_service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransportation_service/Delete", ReplyAction="http://tempuri.org/ITransportation_service/DeleteResponse")]
-        void Delete(TransportationCompanyProject.Model.City city);
+        void Delete(TransportationCompanyProject.ServiceReference1.City city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransportation_service/Delete", ReplyAction="http://tempuri.org/ITransportation_service/DeleteResponse")]
-        System.Threading.Tasks.Task DeleteAsync(TransportationCompanyProject.Model.City city);
+        System.Threading.Tasks.Task DeleteAsync(TransportationCompanyProject.ServiceReference1.City city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,11 +120,11 @@ namespace TransportationCompanyProject.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public void Delete(TransportationCompanyProject.Model.City city) {
+        public void Delete(TransportationCompanyProject.ServiceReference1.City city) {
             base.Channel.Delete(city);
         }
         
-        public System.Threading.Tasks.Task DeleteAsync(TransportationCompanyProject.Model.City city) {
+        public System.Threading.Tasks.Task DeleteAsync(TransportationCompanyProject.ServiceReference1.City city) {
             return base.Channel.DeleteAsync(city);
         }
     }

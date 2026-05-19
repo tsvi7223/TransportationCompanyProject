@@ -35,7 +35,7 @@ namespace TransportationCompanyProject.DB
 
         public BaseDB()
         {
-            connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\DB\DBTransportationCompanyProject.accdb;Persist Security Info=False;";
+            connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..\..\..\TransportationCompany_Server\DB\DBTransportationCompanyProject.accdb;Persist Security Info=False;";
             this.connection = new OleDbConnection(connectionString);
             command = new OleDbCommand();
             command.Connection = this.connection;

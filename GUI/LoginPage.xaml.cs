@@ -71,7 +71,7 @@ namespace TransportationCompanyProject.GUI
 
  //First find the user in our database
             //DB.UserList users = UserDB.GetInstance().SelectByUserProprty(UserNameTbox.Text,PassTbox.Text);
-            UserList users = TranService.getAllUsers();
+            UserList users = TranService.SelectByUserProprty(UserNameTbox.Text, PassTbox.Text);
             if (users.First().UserName == UserNameTbox.Text && users.First().UserPassword == PassTbox.Text)
             {
                 this.user = users.First();

@@ -21,5 +21,10 @@ namespace TransportationCompany_Server
         {
             return UserDB.GetInstance().SelectAll();
         }
+    
+        public UserList SelectByUserProprty(string name, string pass)
+        {
+            return UserDB.GetInstance().SelectByUserProprty(name, pass );
+        }
     }
 }
