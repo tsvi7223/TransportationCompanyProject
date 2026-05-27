@@ -10,7 +10,7 @@ namespace TransportationCompanyProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private VehicleList view;
+        //private VehicleList view;
 
         public MainWindow()
         {

@@ -1,0 +1,26 @@
+﻿<Page x:Class="TransportationCompanyProject.GUI.Exemple"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TransportationCompanyProject.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Exemple">
+
+    <Grid>
+        <ListView Name="listView">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding ProductName}" Width="150"/>
+
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="80"/>
+
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+
+                    <GridViewColumn Header="Category ID" DisplayMemberBinding="{Binding CategoryID}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>

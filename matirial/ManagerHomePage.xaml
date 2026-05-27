@@ -1,4 +1,4 @@
-﻿<Page x:Class="TransportationCompanyProject.GUI.ManagerHomePage"
+﻿ <Page x:Class="TransportationCompanyProject.GUI.ManagerHomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,7 +19,7 @@
             </TabItem>
 
             <TabItem Header="Rides">
-                <!--Grid>
+                <Grid>
                     <DataGrid>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="First Name"/>
@@ -28,14 +28,14 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                </Grid-->
-                <local:RideListControl/>
+                </Grid>
+                <!--<local:RideListControl/>-->
             </TabItem>
 
 
             <TabItem Header="Drivers List">
                 <!--שליפת נתונים-->
-                <local:DriverListControl />
+                <!--<local:DriverListControl />-->
 
             </TabItem>
             <TabItem Header="Drivers">

@@ -102,81 +102,122 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="GUI\AddressPage.xaml.cs">
+    <Compile Include="GUI\part_of_project\Personal_area.xaml.cs">
+      <DependentUpon>Personal_area.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\AddressPage.xaml.cs">
       <DependentUpon>AddressPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\CustomerSignUp - Copy.cs" />
-    <Compile Include="GUI\CustomerSignUp.cs" />
-    <Compile Include="GUI\CustomerListControl.xaml.cs">
+    <Compile Include="matirial\CustomerSignUp - Copy.cs" />
+    <Compile Include="matirial\CustomerListControl.xaml.cs">
       <DependentUpon>CustomerListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\DriverListControl .xaml.cs">
-      <DependentUpon>DriverListControl .xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Exemple.xaml.cs">
+    <Compile Include="matirial\Exemple.xaml.cs">
       <DependentUpon>Exemple.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ManagerListControl.xaml.cs">
+    <Compile Include="GUI\part_of_project\Customer_home_page - Copy.xaml.cs">
+      <DependentUpon>Customer_home_page - Copy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\part_of_project\Driver_home_page.xaml.cs">
+      <DependentUpon>Driver_home_page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\ManagerListControl.xaml.cs">
       <DependentUpon>ManagerListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\BasePage.xaml.cs">
+    <Compile Include="matirial\BasePage.xaml.cs">
       <DependentUpon>BasePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\RideListControl.xaml.cs">
+    <Compile Include="GUI\part_of_project\Manager_home_page.xaml.cs">
+      <DependentUpon>Manager_home_page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\AddressPage.xaml.cs">
+      <DependentUpon>AddressPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\CustomerListControl.xaml.cs">
+      <DependentUpon>CustomerListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\CustomerSignUp - Copy.cs" />
+    <Compile Include="matirial\matirial\CustomerSignUp.cs" />
+    <Compile Include="matirial\matirial\DriverListControl .xaml.cs">
+      <DependentUpon>DriverListControl .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\Exemple.xaml.cs">
+      <DependentUpon>Exemple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\ManagerHomePage.xaml.cs">
+      <DependentUpon>ManagerHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\ManagerListControl.xaml.cs">
+      <DependentUpon>ManagerListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\RideListControl.xaml.cs">
       <DependentUpon>RideListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\RideRequestListControl.xaml.cs">
+    <Compile Include="matirial\matirial\RideRequestListControl.xaml.cs">
       <DependentUpon>RideRequestListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\VehicleListControl.xaml.cs">
+    <Compile Include="matirial\matirial\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\matirial\VehicleListControl.xaml.cs">
       <DependentUpon>VehicleListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Util\VehicleSeeder.cs" />
-    <Page Include="GUI\AddressPage.xaml">
+    <Compile Include="matirial\RideListControl.xaml.cs">
+      <DependentUpon>RideListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\RideRequestListControl.xaml.cs">
+      <DependentUpon>RideRequestListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="matirial\VehicleListControl.xaml.cs">
+      <DependentUpon>VehicleListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Util\VehicleSeeder.cs" />
+    <Page Include="GUI\part_of_project\Personal_area.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\CustomerListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GUI\DriverListControl .xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GUI\Exemple.xaml">
+    <Page Include="matirial\AddressPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\ManagerHomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GUI\ManagerListControl.xaml">
+    <Page Include="matirial\CustomerListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GUI\BasePage.xaml">
+    <Page Include="matirial\Exemple.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\RideListControl.xaml">
+    <Page Include="GUI\part_of_project\Customer_home_page - Copy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GUI\RideRequestListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GUI\SignUpPage.xaml">
+    <Page Include="GUI\part_of_project\Driver_home_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\VehicleListControl.xaml">
+    <Page Include="matirial\ManagerHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="matirial\ManagerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\BasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\part_of_project\Manager_home_page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,19 +229,77 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GUI\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\ManagerHomePage.xaml.cs">
+    <Compile Include="matirial\ManagerHomePage.xaml.cs">
       <DependentUpon>ManagerHomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\SignUpPage.xaml.cs">
-      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="matirial\matirial\AddressPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\BasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\CustomerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\DriverListControl .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\Exemple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\ManagerHomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\ManagerListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\RideListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\RideRequestListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\SignUpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\matirial\VehicleListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\RideListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\RideRequestListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\SignUpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="matirial\VehicleListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
