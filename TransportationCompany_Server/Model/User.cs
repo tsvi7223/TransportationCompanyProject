@@ -44,6 +44,11 @@ namespace TransportationCompanyProject.Model
 
         public User() { }
 
+        public virtual UserType GetType()
+        {
+            return UserType.User;
+        }
+
         public User(string userPassword, string userName, int Id,
             string lName, string fName, string phoneNumber, string emailAddress,
             DateTime dateOfBirth, Address address)

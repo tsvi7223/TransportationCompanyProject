@@ -19,6 +19,10 @@ namespace TransportationCompanyProject.Model
         {
 
         }
+        public override UserType GetType()
+        {
+            return UserType.Customer;
+        }
     }
 }
 

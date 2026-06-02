@@ -10,7 +10,8 @@ namespace TransportationCompanyProject.Model
     {
         Driver,
         Manager,
-        Customer
+        Customer,
+        User
     }
 }
 

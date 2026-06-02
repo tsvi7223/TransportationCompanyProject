@@ -29,21 +29,21 @@ namespace TransportationCompanyProject.DB
         [OperationContract]
         public void Delete(Street street)
         {
-            command.CommandText = $"DELETE FROM Street WHERE(Street.streetId = {street.Id})";
+            command.CommandText = $"DELETE FROM Streets WHERE(Street.streetId = {street.Id})";
             base.ExecuteNonQuery();
         }
 
         [OperationContract]
         public StreetList SelectAll()
         {
-            command.CommandText = "SELECT * FROM Street";
+            command.CommandText = "SELECT * FROM Streets";
             return new StreetList(base.Select());
         }
 
         [OperationContract]
         public void Update(Street street)
         {
-            command.CommandText = $"UPDATE Street SET streetId = {street.Id}, " +
+            command.CommandText = $"UPDATE Streets SET streetId = {street.Id}, " +
                 $"streetName = '{street.StreetName}' WHERE streetId = {street.Id}";
 
             base.ExecuteNonQuery();
@@ -52,7 +52,7 @@ namespace TransportationCompanyProject.DB
         [OperationContract]
         public void Insert(Street street)
         {
-            command.CommandText = $"INSERT INTO Street (streetId, streetName)" +
+            command.CommandText = $"INSERT INTO Streets (streetId, streetName)" +
                 $"VALUES({street.Id}, '{street.StreetName}')";
             base.ExecuteNonQuery();
         }
@@ -77,7 +77,7 @@ namespace TransportationCompanyProject.DB
         [OperationContract]
         internal Street SelectById(int Id)
         {
-            command.CommandText = $"SELECT * FROM Street WHERE streetId = {Id}";
+            command.CommandText = $"SELECT * FROM Streets WHERE streetId = {Id}";
             StreetList streets = new StreetList(base.Select());
             try
             {

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.GUI.NewFolder1
 {
@@ -20,9 +21,12 @@ namespace TransportationCompanyProject.GUI.NewFolder1
     /// </summary>
     public partial class Customer_home_page : Page
     {
-        public Customer_home_page()
+        public User user = new User();
+
+        public Customer_home_page(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
         private void NewRide_Click(object sender, RoutedEventArgs e)

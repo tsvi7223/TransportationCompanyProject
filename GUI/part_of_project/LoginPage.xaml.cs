@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TransportationCompany_Server;
 using TransportationCompanyProject.DB;
+using TransportationCompanyProject.GUI.NewFolder1;
 using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.GUI
@@ -36,10 +27,10 @@ namespace TransportationCompanyProject.GUI
             this.NavigationService.Navigate(new SignUpPage());
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
 
-        }
+        //}
 
   
 
@@ -74,16 +65,43 @@ namespace TransportationCompanyProject.GUI
             UserList users = TranService.SelectByUserProprty(UserNameTbox.Text, PassTbox.Text);
             if (users.First().UserName == UserNameTbox.Text && users.First().UserPassword == PassTbox.Text)
             {
+                if(Customer cust = CustomerDB.GetInstance().SelectById(user.Id) == null)
+                        if(Driver Driver = DriverDB.GetInstance().SelectById(user.Id))
+                Manager Manager = ManagerDB.GetInstance().SelectById(user.Id);
                 this.user = users.First();
                 NavigationService nav = NavigationService.GetNavigationService(this);
+
+                switch (user.GetType())
+                {
+                    case UserType.Manager:
+                        nav.Navigate(new Manager_home_page(user));
+                        break;
+
+                    case UserType.Driver:
+                        nav.Navigate(new Driver_home_page(user));
+                        break;
+
+                    case UserType.Customer:
+                        nav.Navigate(new Customer_home_page(user));
+                        break;
+
+                    default:
+                        MessageBox.Show("סוג משתמש לא מוכר");
+                        break;
+                }
                 //לשלוח משתמש דרך בנאי
-                nav.Navigate(new ManagerHomePage(this.user));
+               
             }
             else
             {
                 MessageBox.Show("אחד או יותר מהנתונים שהכנסת שגויים אנא נסה שנית ", "", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

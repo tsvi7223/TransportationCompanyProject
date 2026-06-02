@@ -92,6 +92,7 @@
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Driver.cs" />
+    <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\RequestStatus.cs" />

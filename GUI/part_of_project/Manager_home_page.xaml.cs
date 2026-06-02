@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TransportationCompanyProject.Model;
 
 namespace TransportationCompanyProject.GUI.NewFolder1
 {
@@ -20,9 +21,27 @@ namespace TransportationCompanyProject.GUI.NewFolder1
     /// </summary>
     public partial class Manager_home_page : Page
     {
-        public Manager_home_page()
+        public User user = new User();
+        public Manager_home_page(User user)
         {
             InitializeComponent();
+            this.user = user;
+        }
+
+
+        private void ApproveDriver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RejectDriver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AssignDriver_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

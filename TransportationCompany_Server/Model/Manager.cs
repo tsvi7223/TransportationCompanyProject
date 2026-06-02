@@ -21,6 +21,10 @@ namespace TransportationCompanyProject.Model
             : base(userPassword, UserName, Id, lName, fName, phoneNumber, emailAddress, dateOfBirth, address)
         {
         }
+        public override UserType GetType()
+        {
+            return UserType.Manager;
+        }
     }
 }
 

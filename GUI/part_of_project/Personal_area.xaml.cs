@@ -24,5 +24,15 @@ namespace TransportationCompanyProject.GUI.part_of_project
         {
             InitializeComponent();
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

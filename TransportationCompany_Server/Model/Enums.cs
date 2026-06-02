@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransportationCompanyProject.GUI
+namespace TransportationCompany_Server.Model
 {
-    internal class CustomerSignUp
+    public enum UserType
     {
+        Driver,
+        Manager,
+        Customer,
+
+        User
     }
 }

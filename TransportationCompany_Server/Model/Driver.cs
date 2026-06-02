@@ -33,7 +33,10 @@ namespace TransportationCompanyProject.Model
             this.Vehicle = vehicle;
             this.IsActive = isActive;
         }
-
+        public override UserType GetType()
+        {
+            return UserType.Driver;
+        }
         public Driver()
         {
         }

@@ -12,22 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TransportationCompanyProject.Model;
 
-namespace TransportationCompanyProject.GUI
+namespace TransportationCompanyProject.GUI.NewFolder1
 {
     /// <summary>
-    /// Interaction logic for ManagerHomePage.xaml
+    /// Interaction logic for Customer_home_page.xaml
     /// </summary>
-    public partial class ManagerHomePage : Page
+    public partial class Customer_home_page : Page
     {
-        private User user;
-
-        public ManagerHomePage(User user)
+        public Customer_home_page()
         {
             InitializeComponent();
-            this.user = user;
         }
 
+        private void NewRide_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelRide_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PersonalArea_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
